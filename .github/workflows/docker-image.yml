@@ -48,4 +48,5 @@ jobs:
           username: ubuntu
           key: ${{ secrets.AWS_SECRET_KEY }}
           port: ${{ secrets.AWS_PORT }}
-        run: whoami
+          script: |
+            whoami
