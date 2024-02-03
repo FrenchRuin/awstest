@@ -31,5 +31,10 @@ jobs:
     - name: Build and push
       uses: docker/build-push-action@v5
       with:
+        context: .
+        file: ./DockerFile
+        platforms: linux/amd64
         push: true
-        tags: ${{ secrets.DOCKER_USERNAME }}/dimg:latest
+        tags: latest
+        labels: ${{ secrets.DOCKER_USERNAME }}/dimg
+        
