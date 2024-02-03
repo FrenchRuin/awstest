@@ -29,7 +29,6 @@ jobs:
 
     - name: Build and push Docker image
       uses: docker/build-push-action@v2
-      with:
-        context: .
-        push: true
-        tags: ${{ secrets.DOCKER_USERNAME }}/dimg:latest
+      run: |
+        docker build -t ${{ secrets.DOCKER_USERNAME }}/dimg .
+        docker push ${{ secrets.DOCKER_USERNAME }}/dimg
