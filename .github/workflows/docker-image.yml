@@ -49,4 +49,7 @@ jobs:
           key: ${{ secrets.AWS_SECRET_KEY }}
           port: ${{ secrets.AWS_PORT }}
           script: |
-            whoami
+            sudo docker rm -f $(docker ps -qa)
+            sudo docker pull ${{ secrets.DOCKER_USERNAME }}/dimg:latest
+            docker-compose up -d
+            docker image prune -f
