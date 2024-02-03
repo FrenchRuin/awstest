@@ -13,6 +13,6 @@ public class TestController {
 
     @GetMapping("/test")
     public String home() {
-        return "도커 asdasd";
+        return "도커 입니다용 !";
     }
 }
