@@ -40,3 +40,18 @@ jobs:
           docker build -t app .
           docker tag app ${{ secrets.DOCKER_USERNAME }}/dimg:latest
           docker push ${{ secrets.DOCKER_USERNAME }}/dimg:latest
+
+      - name: Deploy to server
+        uses: appleboy/ssh-action@master
+        id: deploy
+        with:
+          host: ${{ secrets.AWS_HOST }}
+          username: ubuntu
+          key: ${{ secrets.AWS_SECRET_KEY }}
+          port: ${{ secrets.AWS_PORT }}
+        run: |
+          whoami
+          sudo docker rm -f $(docker ps -qa)
+          sudo docker pull ${{ secrets.DOCKER_USERNAME}/dimg
+          sudo docker-compose up -d
+          sudo docker image prune -f
